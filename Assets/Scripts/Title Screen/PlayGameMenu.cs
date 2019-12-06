@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /**
  * <summary>Manages the play game menu.</summary>
@@ -14,7 +15,6 @@ public class PlayGameMenu : MonoBehaviour
     {
         objMgr = Camera.main.GetComponent<ObjectManager>();
         dMgr = Camera.main.GetComponent<DataManager>();
-        print(SaveManager.existsData());
     }
 
     public void closePanel()
@@ -25,7 +25,8 @@ public class PlayGameMenu : MonoBehaviour
 
     public void openPanel()
     {
-        objMgr.playGamePanel.SetActive(true);
+        Start(); // Fixes bug of the game not being initialized.
+        gameObject.SetActive(true);
         objMgr.SetAllButtonsActive(false);
     }
 
@@ -50,11 +51,9 @@ public class PlayGameMenu : MonoBehaviour
         }
         else
         {
-            // open first level
-            dMgr.setCompletedLevels(new List<SerLevel>());
-            dMgr.addCompletedLevel(new SerLevel());
-            Debug.Log("Create ser lvl");
+            dMgr.Setup();
             SaveManager.save(dMgr);
+            SceneManager.LoadScene("Level1", LoadSceneMode.Single);
         }
     }
 

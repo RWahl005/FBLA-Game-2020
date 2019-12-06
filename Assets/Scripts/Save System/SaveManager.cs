@@ -42,7 +42,7 @@ public class SaveManager
             FileStream file = File.Open(filePath, FileMode.Open);
 
             sp = (SerPlayer)bf.Deserialize(file);
-            convertSerPlayer(sp, dm);
+            dm.LoadDataManager(sp);
             file.Close();
             return true;
         }

@@ -7,10 +7,10 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    protected int coinsCollected;
-    protected int health;
-    protected List<string> baas;
-    protected List<SerLevel> lvls;
+    private int coinsCollected;
+    private int health;
+    private List<string> baas;
+    private List<SerLevel> lvls;
 
     protected float jumpBoostValue;
 
@@ -97,6 +97,27 @@ public class DataManager : MonoBehaviour
     public void setJumpBoost(float value)
     {
         jumpBoostValue = value;
+    }
+
+    /**
+     * Load SerPlayer to the DataManager.
+     */
+    public void LoadDataManager(SerPlayer sp)
+    {
+        this.baas = sp.baas == null ? new List<string>() : sp.baas;
+        this.coinsCollected = sp.coinsCollected == 0 ? 0 :  sp.coinsCollected;
+        this.health = sp.health == 0 ? 5 : sp.health;
+        this.jumpBoostValue = sp.jumpBoostLevel;
+        this.lvls = sp.levelsCleared == null ? new List<SerLevel>() : sp.levelsCleared;
+    }
+
+    public void Setup()
+    {
+        baas = new List<string>();
+        coinsCollected = 0;
+        health = 6;
+        jumpBoostValue = 3;
+        lvls = new List<SerLevel>();
     }
 
 }
