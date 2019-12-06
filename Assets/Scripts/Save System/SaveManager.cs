@@ -9,14 +9,16 @@ using UnityEngine;
  */
 public class SaveManager
 {
-    //public static string filePath = Application.persistentDataPath + Path.DirectorySeparatorChar + "saves" + Path.DirectorySeparatorChar + "bryanSave.dat";
-    public static string filePath = Application.dataPath + "/saves/bryanSave.dat";
+    public static string filePath = Application.persistentDataPath + Path.DirectorySeparatorChar + "saves" + Path.DirectorySeparatorChar + "bryanSave.dat";
+    //public static string filePath = Application.dataPath + "/saves/bryanSave.dat";
+    public static string directoryPath = Application.persistentDataPath + Path.DirectorySeparatorChar + "saves";
+    //public static string directoryPath = Application.dataPath + Path.DirectorySeparatorChar + "saves";
 
     public static void save(DataManager dm)
     {
-        if (!Directory.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "save"))
+        if (!Directory.Exists(directoryPath))
         {
-            Directory.CreateDirectory(Application.persistentDataPath + Path.DirectorySeparatorChar + "save");
+            Directory.CreateDirectory(directoryPath);
         }
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(filePath);
@@ -28,7 +30,7 @@ public class SaveManager
 
     public static bool load(DataManager dm)
     {
-        if (!Directory.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "save"))
+        if (!Directory.Exists(directoryPath))
         {
             return false;
         }

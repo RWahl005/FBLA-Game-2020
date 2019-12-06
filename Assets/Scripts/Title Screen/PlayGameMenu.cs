@@ -53,8 +53,8 @@ public class PlayGameMenu : MonoBehaviour
             // open first level
             dMgr.setCompletedLevels(new List<SerLevel>());
             dMgr.addCompletedLevel(new SerLevel());
-            SaveManager.save(dMgr);
             Debug.Log("Create ser lvl");
+            SaveManager.save(dMgr);
         }
     }
 
