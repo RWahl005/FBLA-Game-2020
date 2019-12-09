@@ -4,6 +4,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+/**
+ * Handles the DataManager.
+ */
 public class DataManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -19,81 +22,130 @@ public class DataManager : MonoBehaviour
         SaveManager.load(this);
     }
 
+    /**
+     * Save the game.
+     */
     public void save()
     {
         SaveManager.save(this);
     }
 
+    /**
+     * Grab the amount of coins.
+     */
     public int getCoins()
     {
         return coinsCollected;
     }
 
+    /**
+     * Set the amount of coins.
+     */
     public void setCoins(int value)
     {
         coinsCollected = value;
     }
 
+    /**
+     * Add coins to the coin counter.
+     */
     public void addCoins(int amount)
     {
         coinsCollected += amount;
     }
 
+    /**
+     * Get health of the player.
+     */
     public int getHealth()
     {
         return health;
     }
 
+    /**
+     * Set the health of the player.
+     */
     public void setHealth(int amount)
     {
         health = amount;
     }
 
+    /**
+     * Remove the health of the player.
+     */
     public void removeHealth(int amount)
     {
-        health += amount;
+        health -= amount;
     }
 
+
+    /**
+     * Add health points to the user.
+     */
     public void addHealth(int amount)
     {
         health += amount;
     }
 
+    /**
+     * Get the baa data.
+     */
     public List<string> getBAA()
     {
         return baas;
     }
 
+    /**
+     * Add a BAA title.
+     */
     public void addBAA(string baa)
     {
         baas.Add(baa);
     }
 
+    /**
+     * Set the entile BAA list.
+     */
     public void setBAA(List<string> baa)
     {
         baas = baa;
     }
 
+    /**
+     * Get the list of completed levels.
+     */
     public List<SerLevel> getCompletedLevels()
     {
         return lvls;
     }
 
+    /**
+     * Set the completed levels list.
+     */
     public void setCompletedLevels(List<SerLevel> lvls)
     {
         this.lvls = lvls;
     }
 
+    /**
+     * Add a completed level.
+     */
     public void addCompletedLevel(SerLevel lvl)
     {
         lvls.Add(lvl);
     }
 
+    /**
+     * Get the jump boost value.
+     */
     public float getJumpBoost()
     {
         return jumpBoostValue;
     }
 
+    /**
+     * Set the jump boost level.
+     */
     public void setJumpBoost(float value)
     {
         jumpBoostValue = value;
@@ -109,8 +161,12 @@ public class DataManager : MonoBehaviour
         this.health = sp.health == 0 ? 5 : sp.health;
         this.jumpBoostValue = sp.jumpBoostLevel;
         this.lvls = sp.levelsCleared == null ? new List<SerLevel>() : sp.levelsCleared;
+        EventHandler.callEvent(new LevelLoadEvent());
     }
 
+    /**
+     * Intialize the data for the datamanger.
+     */
     public void Setup()
     {
         baas = new List<string>();

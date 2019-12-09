@@ -7,7 +7,7 @@ using System;
 /// I CANNOT figure out what I am doing with the data save system.
 /// On Rewrite #5. At this pace this game will never get done.
 /// </summary>
-public class Level : MonoBehaviour
+public class Level : MonoBehaviour, IEventHandler
 {
     public int id;
     public List<SerCheckPoint> hitCheckPoints;
@@ -19,10 +19,19 @@ public class Level : MonoBehaviour
     {
         hitCheckPoints = new List<SerCheckPoint>();
         collectedCoins = new List<SerCoin>();
+        EventHandler.registerHandler(this);
         dm = gameObject.GetComponent<DataManager>();
+        
+    }
 
+    /**
+     * Called when the level data is loaded.
+     */
+    [EventHandler]
+    public void OnLevelLoad(LevelLoadEvent evt)
+    {
         SerLevel serLvl = dm.getCompletedLevels().Find(isLvlFound);
-        if(serLvl != null)
+        if (serLvl != null)
             Serializer.LoadLevel(serLvl, this);
     }
 
