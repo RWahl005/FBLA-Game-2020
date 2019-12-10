@@ -20,6 +20,7 @@ public class SerLevel
     // Might be unused.
     public List<SerCheckPoint> checkPointsReached;
     public int id;
+    public bool completed;
 }
 
 [System.Serializable]
@@ -33,4 +34,7 @@ public class SerCoin
 public class SerCheckPoint
 {
     public int id;
+    public float x;
+    public float y;
+    public float z;
 }

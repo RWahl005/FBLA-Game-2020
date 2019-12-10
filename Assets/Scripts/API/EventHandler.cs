@@ -19,7 +19,7 @@ public class EventHandler : MonoBehaviour
 	/// <summary>
 	/// Call an event.
 	/// </summary>
-	/// <param name="o">The event to be called. Ex: CarHitTriggerEvent <seealso cref="CarHitTriggerEvent"/></param>
+	/// <param name="o">The event to be called. Ex: CarHitTriggerEvent <seealso cref=""/></param>
 	public static void callEvent(object o)
 	{
 		foreach (IEventHandler e in getRegisters())

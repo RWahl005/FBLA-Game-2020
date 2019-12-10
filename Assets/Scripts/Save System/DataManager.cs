@@ -20,6 +20,7 @@ public class DataManager : MonoBehaviour
     void Start()
     {
         SaveManager.load(this);
+        
     }
 
     /**
@@ -130,7 +131,7 @@ public class DataManager : MonoBehaviour
     /**
      * Add a completed level.
      */
-    public void addCompletedLevel(SerLevel lvl)
+    public void addLevel(SerLevel lvl)
     {
         lvls.Add(lvl);
     }
@@ -161,7 +162,32 @@ public class DataManager : MonoBehaviour
         this.health = sp.health == 0 ? 5 : sp.health;
         this.jumpBoostValue = sp.jumpBoostLevel;
         this.lvls = sp.levelsCleared == null ? new List<SerLevel>() : sp.levelsCleared;
-        EventHandler.callEvent(new LevelLoadEvent());
+        EventHandler.callEvent(new PreLevelLoadEvent());
+    }
+
+    public bool containsLevelWithId(int id)
+    {
+        foreach(SerLevel lvl in getCompletedLevels())
+        {
+            if (lvl.id == id) return true;
+        }
+
+        return false;
+    }
+
+    public void replaceLevelWithId(SerLevel replacement, int id)
+    {
+        foreach (SerLevel lvl in getCompletedLevels())
+        {
+            if (lvl.id == id)
+            {
+                List<SerLevel> lvls = this.lvls;
+                int index = lvls.IndexOf(lvl);
+                lvls.Remove(lvl);
+                lvls.Insert(index, replacement);
+                return;
+            }
+        }
     }
 
     /**

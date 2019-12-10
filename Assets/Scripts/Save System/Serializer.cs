@@ -10,6 +10,7 @@ public class Serializer
         sl.coinsCollected = lvl.getCollectedCoins();
         sl.checkPointsReached = lvl.getHitCheckPoints();
         sl.id = lvl.getId();
+        sl.completed = lvl.completed;
         return sl;
     }
 
@@ -43,6 +44,12 @@ public class Serializer
     {
         SerCheckPoint scp = new SerCheckPoint();
         scp.id = checkPoint.id;
+        float[] points = checkPoint.getPosition();
+
+        scp.x = points[0];
+        scp.y = points[1];
+        scp.z = points[2];
+
         return scp;
     }
 
@@ -58,5 +65,6 @@ public class Serializer
         // My naming conventions suck.
         lvl.hitCheckPoints = sl.checkPointsReached;
         lvl.collectedCoins = sl.coinsCollected;
+        lvl.completed = sl.completed;
     }
 }

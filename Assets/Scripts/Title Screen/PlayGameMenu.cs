@@ -45,7 +45,7 @@ public class PlayGameMenu : MonoBehaviour
             else
             {
                 // open first level
-                dMgr.addCompletedLevel(new SerLevel());
+                dMgr.addLevel(new SerLevel());
                 Debug.Log("Create ser vlvl");
             }
         }

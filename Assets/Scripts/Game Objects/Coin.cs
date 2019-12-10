@@ -2,13 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin : MonoBehaviour, IEventHandler
 {
     private DataManager dm;
+    private Level lvl;
 
     private void Start()
     {
         dm = Camera.main.GetComponent<DataManager>();
+        lvl = Camera.main.GetComponent<Level>();
+        EventHandler.registerHandler(this);
+    }
+
+    [EventHandler]
+    public void loadLevel(LevelLoadEvent evt)
+    {
+        if (lvl.containsCoinWithId(id))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public int id;
@@ -27,6 +39,7 @@ public class Coin : MonoBehaviour
 
         gameObject.SetActive(false);
         dm.addCoins(1);
+        lvl.addCoin(this);
     }
 
 }
