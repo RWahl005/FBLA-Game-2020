@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour, IEventHandler
 {
+
+    public GameObject gameOver;
 
     private bool invincible;
     private Color defaultColor;
     private SpriteRenderer renderer;
     private bool isDefaultColor = true;
+
+    // Handles how many hits the player can get.
+    private int hits;
+    private static bool dead;
 
     public GameObject defaultPoisition;
 
@@ -20,8 +27,9 @@ public class PlayerManager : MonoBehaviour, IEventHandler
         dm = Camera.main.GetComponent<DataManager>();
         defaultColor = renderer.color;
         EventHandler.registerHandler(this);
-
+        hits = 1;
         respawn();
+        dead = false;
     }
 
 
@@ -60,11 +68,31 @@ public class PlayerManager : MonoBehaviour, IEventHandler
                 return;
             }
         }
-        if(dm.getHealth() < 1)
+        if(transform.position.y < -5)
         {
             EventHandler.callEvent(new PlayerDeathEvent(new float[] { transform.position.x, transform.position.y, transform.position.z }));
         }
-        if(transform.position.y < -5)
+        if (dead)
+        {
+            transform.Rotate(new Vector3(0, 0, 50 * Time.deltaTime));
+        }
+        if(transform.rotation.eulerAngles.z > 90)
+        {
+            LimboLevel.lvlId = Camera.main.GetComponent<Level>().id;
+            SceneManager.LoadScene("LimboLand", LoadSceneMode.Single);
+        }
+    }
+
+    [EventHandler]
+    public void onPlayerDamage(PlayerDamageEvent evt)
+    {
+        if (isInvincible()) {
+            evt.setCancelled(true);
+            return;
+        }
+        changeHit(-evt.getDamageTaken());
+        startInvincible();
+        if(getHits() < 1)
         {
             EventHandler.callEvent(new PlayerDeathEvent(new float[] { transform.position.x, transform.position.y, transform.position.z }));
         }
@@ -73,7 +101,16 @@ public class PlayerManager : MonoBehaviour, IEventHandler
     [EventHandler]
     public void onDeath(PlayerDeathEvent evt)
     {
-        dm.setHealth(6);
+        dm.removeHealth(1);
+        if (dm.getHealth() < 1)
+        {
+            gameOver.SetActive(true);
+            dead = true;
+        }
+        if (dead)
+        {
+            return;
+        }
         List<SerCheckPoint> serCheckPoint = Camera.main.GetComponent<Level>().getHitCheckPoints();
         if(serCheckPoint.Count == 0)
         {
@@ -87,6 +124,26 @@ public class PlayerManager : MonoBehaviour, IEventHandler
             transform.position = new Vector3(scp.x, scp.y, scp.z);
             return;
         }
+    }
+
+    public static bool isDead()
+    {
+        return dead;
+    }
+
+    public int getHits()
+    {
+        return hits;
+    }
+
+    public void setHits(int i)
+    {
+        hits = i;
+    }
+
+    public void changeHit(int i)
+    {
+        hits += i;
     }
 
     private void respawn()

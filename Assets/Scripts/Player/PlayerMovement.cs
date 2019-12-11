@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (PlayerManager.isDead()) return;
         animator.SetFloat("Speed", 0);
         Camera.main.transform.position = new Vector3(transform.position.x, 0, -10);
         previousY = transform.position.y;
