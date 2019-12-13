@@ -307,10 +307,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  totalCheckpoints: []
+  totalCheckpoints: 2
+  totalGameOvers: 0
   hitCheckPoints: []
   collectedCoins: []
   completed: 0
+  coinsCollected: 0
 --- !u!114 &294565293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2397,6 +2399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b90cab202b246429ef48fb684942e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevel: 
 --- !u!1 &2091820213
 GameObject:
   m_ObjectHideFlags: 0

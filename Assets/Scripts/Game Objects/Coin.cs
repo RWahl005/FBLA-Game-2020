@@ -21,6 +21,10 @@ public class Coin : MonoBehaviour, IEventHandler
         {
             gameObject.SetActive(false);
         }
+        else
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     public int id;
@@ -38,7 +42,6 @@ public class Coin : MonoBehaviour, IEventHandler
         }
 
         gameObject.SetActive(false);
-        dm.addCoins(1);
         lvl.addCoin(this);
     }
 

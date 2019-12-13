@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LimboLevel
+public class GameOverEvent
 {
-    public static int lvlId = 1;
+    public GameOverEvent()
+    {
+
+    }
+    
 }

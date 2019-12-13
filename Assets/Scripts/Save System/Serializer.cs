@@ -11,6 +11,7 @@ public class Serializer
         sl.checkPointsReached = lvl.getHitCheckPoints();
         sl.id = lvl.getId();
         sl.completed = lvl.completed;
+        sl.coinAmount = lvl.coinsCollected; 
         return sl;
     }
 
@@ -66,5 +67,6 @@ public class Serializer
         lvl.hitCheckPoints = sl.checkPointsReached;
         lvl.collectedCoins = sl.coinsCollected;
         lvl.completed = sl.completed;
+        lvl.coinsCollected = sl.coinAmount;
     }
 }

@@ -21,6 +21,7 @@ public class SerLevel
     public List<SerCheckPoint> checkPointsReached;
     public int id;
     public bool completed;
+    public int coinAmount;
 }
 
 [System.Serializable]

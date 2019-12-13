@@ -10,10 +10,12 @@ using System;
 public class Level : MonoBehaviour, IEventHandler
 {
     public int id;
-    public List<CheckPoint> totalCheckpoints;
+    public int totalCheckpoints = 0;
+    public int totalGameOvers = 0;
     public List<SerCheckPoint> hitCheckPoints;
     public List<SerCoin> collectedCoins;
     public bool completed;
+    public int coinsCollected;
 
     private DataManager dm;
 
@@ -24,6 +26,18 @@ public class Level : MonoBehaviour, IEventHandler
         EventHandler.registerHandler(this);
         dm = gameObject.GetComponent<DataManager>();
         
+    }
+
+    [EventHandler]
+    public void gameOver(GameOverEvent evt)
+    {
+        SerLevel serLvl = dm.getCompletedLevels().Find(isLvlFound);
+        if (serLvl != null)
+            Serializer.LoadLevel(serLvl, this);
+        hitCheckPoints = new List<SerCheckPoint>();
+        collectedCoins = new List<SerCoin>();
+        EventHandler.callEvent(new LevelLoadEvent());
+        totalGameOvers += 1;
     }
 
     [EventHandler]
@@ -41,12 +55,13 @@ public class Level : MonoBehaviour, IEventHandler
     [EventHandler]
     public void OnLevelLoad(LevelLoadEvent evt)
     {
-        Debug.Log(this.completed);
+        
     }
 
     public void addCoin(Coin c)
     {
         collectedCoins.Add(Serializer.CoinToSerCoin(c));
+        coinsCollected += 1;
     }
 
     public void addCheckPoint(CheckPoint cp)
@@ -69,11 +84,6 @@ public class Level : MonoBehaviour, IEventHandler
         return collectedCoins;
     }
 
-    public List<CheckPoint> getLevelCheckpoints()
-    {
-        return totalCheckpoints;
-    }
-
     private bool isLvlFound(SerLevel lv)
     {
         return lv.id == id;
@@ -91,5 +101,10 @@ public class Level : MonoBehaviour, IEventHandler
             if (sc.id == id) return true;
         }
         return false;
+    }
+
+    public int getCoinsAmmount()
+    {
+        return coinsCollected;
     }
 }

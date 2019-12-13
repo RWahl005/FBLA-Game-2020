@@ -78,8 +78,13 @@ public class PlayerManager : MonoBehaviour, IEventHandler
         }
         if(transform.rotation.eulerAngles.z > 90)
         {
-            LimboLevel.lvlId = Camera.main.GetComponent<Level>().id;
-            SceneManager.LoadScene("LimboLand", LoadSceneMode.Single);
+            dm.discard();
+            dead = false;
+            transform.rotation = new Quaternion(0,0,0,0);
+            gameObject.transform.position = defaultPoisition.transform.position;
+            gameOver.SetActive(false);
+            EventHandler.callEvent(new GameOverEvent());
+            dm.setHealth(6);
         }
     }
 
