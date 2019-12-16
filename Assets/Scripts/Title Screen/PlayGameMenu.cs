@@ -38,15 +38,16 @@ public class PlayGameMenu : MonoBehaviour
         {
             if(dMgr.getCompletedLevels().Count > 0)
             {
-                // Open level select panel
-                SaveManager.deleteData();
-                Debug.Log("Called lvl select");
+                objMgr.levelSelectPanel.SetActive(true);
+                Debug.Log("test");
+                objMgr.playGamePanel.SetActive(false);
+                
             }
             else
             {
-                // open first level
-                dMgr.addLevel(new SerLevel());
-                Debug.Log("Create ser vlvl");
+                dMgr.Setup();
+                SaveManager.save(dMgr);
+                SceneManager.LoadScene("Level1", LoadSceneMode.Single);
             }
         }
         else
