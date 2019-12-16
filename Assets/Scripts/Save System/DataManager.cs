@@ -202,4 +202,9 @@ public class DataManager : MonoBehaviour
         lvls = new List<SerLevel>();
     }
 
+    public void discard()
+    {
+        SaveManager.load(this);
+    }
+
 }

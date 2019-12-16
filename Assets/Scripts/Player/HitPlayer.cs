@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamagePlayer : MonoBehaviour
+public class HitPlayer : MonoBehaviour
 {
     public int damageAmount = 0;
 
@@ -25,13 +25,7 @@ public class DamagePlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.gameObject.CompareTag("Player")) return;
-        if (pm.isInvincible()) return;
         PlayerDamageEvent pde = new PlayerDamageEvent(damageAmount);
         EventHandler.callEvent(pde);
-        if (!pde.isCancelled())
-        {
-            dm.removeHealth(damageAmount);
-            pm.startInvincible();
-        }
     }
 }

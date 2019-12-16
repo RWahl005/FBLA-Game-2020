@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class CoinCounter : MonoBehaviour
 {
-    DataManager dm;
+    Level lvl;
     Text txt;
     // Start is called before the first frame update
     void Start()
     {
-       dm = Camera.main.GetComponent<DataManager>();
+       lvl = Camera.main.GetComponent<Level>();
         txt = GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        txt.text = formatCoins(dm.getCoins());
+        txt.text = formatCoins(lvl.coinsCollected);
     }
 
     string formatCoins(int value)

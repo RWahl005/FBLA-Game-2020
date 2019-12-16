@@ -20,6 +20,7 @@ public class ObjectManager : MonoBehaviour
     public GameObject settingsPanel;
     public GameObject helpPanel;
     public GameObject readBAAPanel;
+    public GameObject levelSelectPanel;
 
     /**
      * <summary>Get the list of lower buttons.</summary>
@@ -46,6 +47,7 @@ public class ObjectManager : MonoBehaviour
         buttons.Add(settingsPanel);
         buttons.Add(helpPanel);
         buttons.Add(readBAAPanel);
+        buttons.Add(levelSelectPanel);
         return buttons;
     }
 

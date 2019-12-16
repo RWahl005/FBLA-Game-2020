@@ -14,12 +14,21 @@ public class Coin : MonoBehaviour, IEventHandler
         EventHandler.registerHandler(this);
     }
 
+    void Update()
+    {
+        gameObject.transform.Rotate(new Vector3(0, 10, 0));
+    }
+
     [EventHandler]
     public void loadLevel(LevelLoadEvent evt)
     {
         if (lvl.containsCoinWithId(id))
         {
             gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
         }
     }
 
@@ -38,7 +47,6 @@ public class Coin : MonoBehaviour, IEventHandler
         }
 
         gameObject.SetActive(false);
-        dm.addCoins(1);
         lvl.addCoin(this);
     }
 
