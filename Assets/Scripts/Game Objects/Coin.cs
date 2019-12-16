@@ -14,6 +14,11 @@ public class Coin : MonoBehaviour, IEventHandler
         EventHandler.registerHandler(this);
     }
 
+    void Update()
+    {
+        gameObject.transform.Rotate(new Vector3(0, 10, 0));
+    }
+
     [EventHandler]
     public void loadLevel(LevelLoadEvent evt)
     {

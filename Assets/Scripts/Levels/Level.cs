@@ -16,6 +16,7 @@ public class Level : MonoBehaviour, IEventHandler
     public List<SerCoin> collectedCoins;
     public bool completed;
     public int coinsCollected;
+    public GameObject player;
 
     private DataManager dm;
 
