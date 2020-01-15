@@ -31,6 +31,7 @@ public class EndOfLevel : MonoBehaviour
         ResultData.gameOvers = lvl.totalGameOvers;
         ResultData.coinsCollected = lvl.coinsCollected;
         ResultData.hearts = dm.getHealth();
+        ResultData.currentLevel = lvl.id;
         lvl.setCompleted(true);
 
         if (dm.containsLevelWithId(lvl.id))

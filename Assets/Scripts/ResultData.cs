@@ -10,4 +10,5 @@ public class ResultData
     public static int gameOvers = 0;
     public static int checkPointsReached = 0;
     public static int totalCheckPoints = 0;
+    public static int currentLevel = 0;
 }
