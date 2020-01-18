@@ -25,6 +25,7 @@ public class CreditsMenu : MonoBehaviour
 
     public void openPanel()
     {
+        objMgr = Camera.main.GetComponent<ObjectManager>();
         gameObject.SetActive(true);
         objMgr.SetAllButtonsActive(false);
     }

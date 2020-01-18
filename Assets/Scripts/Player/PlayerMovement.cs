@@ -151,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        // Check to see if a semisolid is above the player
         RaycastHit2D semisolidHit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), gameObject.transform.up, transform.localScale.y / 2 + 0.2f, yu);
         if (semisolidHit.collider != null)
         {
@@ -172,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // When the player leaves the ground, disable gravity.
     void OnTriggerExit2D(Collider2D other)
     {
         if (yu == (yu | (1 << other.gameObject.layer)))

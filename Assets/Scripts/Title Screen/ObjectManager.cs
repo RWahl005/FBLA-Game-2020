@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ using UnityEngine;
  */
 public class ObjectManager : MonoBehaviour
 {
+
     public GameObject exitGameButton;
     public GameObject playGameButton;
     public GameObject settingsButton;
@@ -60,7 +62,13 @@ public class ObjectManager : MonoBehaviour
         {
             if (obj != null)
             {
-                obj.SetActive(value);
+                try
+                {
+                    obj.SetActive(value);
+                }catch(Exception ex)
+                {
+                    continue;
+                }
             }
         }
     }
@@ -75,5 +83,6 @@ public class ObjectManager : MonoBehaviour
                 obj.SetActive(false);
             }
         }
+        Debug.Log(Application.persistentDataPath);
     }
 }
