@@ -29,14 +29,22 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
 
+    public bool newJump = true;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
     }
 
+    public LayerMask groundMasks;
+
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (PauseMenu.isPause)
+        {
+            return;
+        }
         if (PlayerManager.isDead()) return;
         animator.SetFloat("Speed", 0);
         Camera.main.transform.position = new Vector3(transform.position.x, 0, -10);
@@ -67,6 +75,23 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Jumping", true);
         }
         deltaY = transform.position.y - previousY;
+
+        // Try and fix a bug
+        if (!newJump) return;
+
+
+        RaycastHit2D semisolidHit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), -gameObject.transform.up, transform.localScale.y / 2  + 0.2f, groundMasks);
+        if (semisolidHit.collider != null && semisolidHit.collider.gameObject.CompareTag("ground"))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            Debug.Log("Yee");
+            isGrounded = false;
+        }
+
+
     }
     // The current acceleration
     public float acc = 3;

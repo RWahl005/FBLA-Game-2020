@@ -18,6 +18,7 @@ public class LogMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.isPause) return;
         if (!sample)
         {
             if(transform.position.y < height)

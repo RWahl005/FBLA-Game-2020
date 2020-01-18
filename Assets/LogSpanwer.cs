@@ -17,6 +17,7 @@ public class LogSpanwer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.isPause) return;
         cooldownTimer -= Time.deltaTime;
         if (cooldownTimer < 0)
         {

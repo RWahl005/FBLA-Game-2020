@@ -20,6 +20,7 @@ public class Car : MonoBehaviour
     void Update()
     {
         if (sample) return;
+        if (PauseMenu.isPause) return;
         curTime += Time.deltaTime;
         if(curTime > time)
         {

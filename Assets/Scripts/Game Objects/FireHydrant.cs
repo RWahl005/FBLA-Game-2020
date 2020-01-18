@@ -20,6 +20,7 @@ public class FireHydrant : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.isPause) return;
         if(Mathf.Abs(lvl.player.transform.position.x - gameObject.transform.position.x) < 10)
         {
             cooldownTimer -= Time.deltaTime;

@@ -39,7 +39,7 @@ public class SignHandler : MonoBehaviour
         }
         else if (isSignOpen)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 isSignOpen = false;
                 signHelpText.SetActive(true);

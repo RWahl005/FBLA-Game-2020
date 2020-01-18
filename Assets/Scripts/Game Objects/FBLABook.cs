@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class FBLABook : MonoBehaviour
 {
+    public int id;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
+    private void Awake()
+    {
+        if(Camera.main.GetComponent<DataManager>().getBAA().Contains(id + ""))
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.isPause) return;
         gameObject.transform.Rotate(new Vector3(70 * Time.deltaTime, 70 * Time.deltaTime, 0));
     }
 
@@ -21,7 +32,7 @@ public class FBLABook : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             gameObject.SetActive(false);
-            Debug.Log("TODO: Give this thing a purpose.");
+            Camera.main.GetComponent<DataManager>().addBAA(id + "");
         }
     }
 }

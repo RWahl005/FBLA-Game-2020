@@ -25,6 +25,7 @@ public class CarSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.isPause) return;
         time += Time.deltaTime;
         if(time > spawnTime)
         {

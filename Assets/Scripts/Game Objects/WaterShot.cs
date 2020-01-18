@@ -23,6 +23,7 @@ public class WaterShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.isPause) return;
         if (original) return;
         transform.position = transform.position + new Vector3(speed * Time.deltaTime, 0, 0);
         countdownTimer -= Time.deltaTime;

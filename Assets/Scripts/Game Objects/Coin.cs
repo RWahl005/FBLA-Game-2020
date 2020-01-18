@@ -16,6 +16,7 @@ public class Coin : MonoBehaviour, IEventHandler
 
     void Update()
     {
+        if (PauseMenu.isPause) return;
         gameObject.transform.Rotate(new Vector3(0, 10, 0));
     }
 
